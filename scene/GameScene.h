@@ -7,6 +7,16 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "DebugCamera.h"
+
+#include "Player.h"
+#include "Enemy.h"
+#include "Skydome.h"
+#include "MapChipField.h"
+#include "CameraController.h"
+#include "DeathParticles.h"
+
+#include <vector>
 
 /// <summary>
 /// ゲームシーン
@@ -35,9 +45,16 @@ public: // メンバ関数
 	void Update();
 
 	/// <summary>
-	/// 描画
+	/// 描画処理
 	/// </summary>
 	void Draw();
+
+	/// <summary>
+	/// すべての当たり判定を行う処理
+	/// </summary>
+	void CheckAllCollisions();
+
+
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -47,4 +64,27 @@ private: // メンバ変数
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
+	
+	ViewProjection viewProjection_;
+
+	//カメラ
+	bool isDebugCameraActive_ = false;
+	DebugCamera* debugCamera_ = nullptr;
+	CameraController* cameraController_ = nullptr;
+
+	//プレイヤー
+	Player* player_ = nullptr;
+	//エネミー
+	std::list<Enemy*> enemies_;
+	//天球
+	Skydome* skydome_ = nullptr;
+	//ブロック
+	Model* modelBlock_ = nullptr;
+	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
+	//デス演出用パーティクル
+	DeathParticles* deathParticles_ = nullptr;
+
+	void GenerateBlocks();
+	//マップチップフィールド
+	MapChipField* mapChipField_ = nullptr;
 };

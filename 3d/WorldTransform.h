@@ -35,6 +35,10 @@ public:
 	/// </summary>
 	void Initialize();
 	/// <summary>
+///	更新処理
+/// </summary>
+	void UpdateMatrix();
+	/// <summary>
 	/// 定数バッファ生成
 	/// </summary>
 	void CreateConstBuffer();

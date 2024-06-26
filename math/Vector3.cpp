@@ -1,5 +1,6 @@
-#include "Vector3.h"
+﻿#include "Vector3.h"
 #include "MyMath/MyMath.h"
+
 
 
 //===============================================================
@@ -61,4 +62,3 @@ Vector3 Vector3::operator/=(float s) {
 	z /= s;
 	return *this;
 }
-
