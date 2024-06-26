@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Skydome.h"
+#include "MapChipBlocks.h"
 #include "MapChipField.h"
 #include "CameraController.h"
 #include "DeathParticles.h"
@@ -22,8 +23,15 @@
 /// ゲームシーン
 /// </summary>
 class GameScene {
-
 public: // メンバ関数
+
+
+	//ゲームフェーズ
+	enum class Phase {
+		kPlay, //ゲームプレイ
+		kDeath //デス演出
+	};
+
 	/// <summary>
 	/// コンストクラタ
 	/// </summary>
@@ -54,9 +62,16 @@ public: // メンバ関数
 	/// </summary>
 	void CheckAllCollisions();
 
+	/// <summary>
+	/// フェーズの切り替え処理
+	/// </summary>
+	void ChangePhase();
 
+	//デスフラグのゲッター
+	bool IsFinished() const { return finished_; }
 
 private: // メンバ変数
+
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
@@ -66,6 +81,9 @@ private: // メンバ変数
 	/// </summary>
 	
 	ViewProjection viewProjection_;
+
+	//ゲームの現在のフェーズ
+	Phase phase_;
 
 	//カメラ
 	bool isDebugCameraActive_ = false;
@@ -78,13 +96,16 @@ private: // メンバ変数
 	std::list<Enemy*> enemies_;
 	//天球
 	Skydome* skydome_ = nullptr;
-	//ブロック
-	Model* modelBlock_ = nullptr;
-	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
+	//マップチップ用ブロック
+	MapChipBlocks* mapChipBlocks_ = nullptr;
+	
 	//デス演出用パーティクル
 	DeathParticles* deathParticles_ = nullptr;
 
-	void GenerateBlocks();
 	//マップチップフィールド
 	MapChipField* mapChipField_ = nullptr;
+
+	//終了フラグ
+	bool finished_ = false;
+
 };

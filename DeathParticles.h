@@ -30,6 +30,15 @@ public:
 	/// </summary>
 	void Draw(const ViewProjection& viewProjection);
 
+	/// <summary>
+	/// ワールド座標の取得
+	/// </summary>
+	const Vector3& GetWorldPos() { return centerPos_; }
+
+	/// <summary>
+	/// 終了フラグの取得
+	/// </summary>
+	bool GetIsFinished() { return isFinished_; }
 private:
 
 	//パーティクルの個数
@@ -47,11 +56,13 @@ private:
 	std::array<Model*, kNumParticles> models_ = { nullptr };
 	//ワールドトランスフォーム
 	std::array<WorldTransform, kNumParticles> worldTransforms_;
+	//パーティクルの中心座標
+	Vector3 centerPos_;
 	//色変更オブジェクト
-	
+	ObjectColor objectColor_;
 	//色の数値
 	Vector4 color_;
-	ObjectColor objectColor_;
+	
 	//終了フラグ
 	bool isFinished_ = false;
 	//経過時間カウント

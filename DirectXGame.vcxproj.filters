@@ -105,6 +105,12 @@
     <ClCompile Include="math\Vector3.cpp">
       <Filter>ソース ファイル\math</Filter>
     </ClCompile>
+    <ClCompile Include="MapChipBlocks.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3d\ViewProjection.h">
@@ -226,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="math\MyMath\MyMath.h">
       <Filter>ヘッダー ファイル\math\MyMath</Filter>
+    </ClInclude>
+    <ClInclude Include="MapChipBlocks.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

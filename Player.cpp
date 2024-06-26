@@ -1,4 +1,4 @@
-﻿#define NOMINMAX
+#define NOMINMAX
 #include "Player.h"
 #include "Math/MyMath/MyMath.h"
 #include "Math/MyMath/Easing.h"
@@ -493,8 +493,7 @@ Vector3 Player::CornerPosition(const Vector3& center, Corner corner) {
 void Player::OnCollision(const Enemy* enemy) {
 	(void)enemy;
 
-	//ジャンプさせる
-	velocity_.y += 1.0f;
+	isAlive_ = false;
 }
 
 AABB Player::GetAABB() {

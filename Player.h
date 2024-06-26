@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "Input.h"
 #include "Model.h"
@@ -128,6 +128,12 @@ public:
 	/// </summary>
 	AABB GetAABB();
 
+	/// <summary>
+	/// 生存フラグの取得
+	/// </summary>
+	bool GetIsAlive() { return isAlive_; }
+
+
 	void SetPos(Vector3 pos) { worldTransform_.translation_ = pos; }
 
 	void SetMapChipField(MapChipField* mapChipField) { mapChipField_ = mapChipField; }
@@ -183,6 +189,8 @@ private:
 	float turnTimer_ = 0.0f;
 	//接地状態フラグ
 	bool onGround_ = true;
+	//生存フラグ
+	bool isAlive_ = true;
 
 };
 

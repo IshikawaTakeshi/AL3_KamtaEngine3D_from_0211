@@ -9,11 +9,12 @@ void DeathParticles::Initialize(Vector3 position) {
 	for (size_t i = 0; i < models_.size(); ++i) {
 		models_[i] = Model::CreateSphere();
 	};
-
+	//中心点の初期化
+	centerPos_ = position;
 	//ワールドトランスフォームの初期化
 	for (size_t i = 0; i < worldTransforms_.size(); ++i) {
 		worldTransforms_[i].Initialize();
-		worldTransforms_[i].translation_ = position;
+		worldTransforms_[i].translation_ = centerPos_;
 	}
 
 	//カラー初期化
