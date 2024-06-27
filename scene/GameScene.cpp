@@ -24,6 +24,7 @@ GameScene::~GameScene() {
 	delete debugCamera_;
 	delete cameraController_;
 	delete mapChipField_;
+	delete fade_;
 }
 
 

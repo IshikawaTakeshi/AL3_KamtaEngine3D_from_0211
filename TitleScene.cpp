@@ -5,7 +5,10 @@
 //TitleScene::TitleScene() {}
 
 TitleScene::~TitleScene() {
-
+	delete fade_;
+	delete titleTextModel_;
+	delete playerModel_;
+	delete enemyModel_;
 }
 
 void TitleScene::Initialize() {
