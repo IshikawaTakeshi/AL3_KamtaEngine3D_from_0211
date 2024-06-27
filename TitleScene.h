@@ -3,7 +3,7 @@
 #include "WorldTransform.h"
 #include "ViewProjection.h"
 #include "DirectXCommon.h"
-#include "Sprite.h"
+#include "Fade.h"
 #include "Matrix4x4.h"
 
 /// <summary>
@@ -12,7 +12,14 @@
 class TitleScene {
 public:
 
-	TitleScene();
+	//タイトルシーンのフェーズ
+	enum class Phase {
+		kFadeIn, //フェードイン
+		kMain, //メイン部
+		kFadeOut, //フェードアウト
+	};
+
+	TitleScene() = default;
 	~TitleScene();
 
 	/// <summary>
@@ -30,20 +37,34 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// フェーズの切り替え処理
+	/// </summary>
+	void ChangePhase();
+
 	//デスフラグのゲッター
 	bool IsFinished() const { return finished_; }
+
+
 private:
 
 	DirectXCommon* dxCommon_ = nullptr;
 
 private:
 
+	//現在のフェーズ
+	Phase phase_ = Phase::kFadeIn;
+
+	//フェード
+	Fade* fade_ = nullptr;
+	//フェード時間
+	static inline const float fadeTime_ = 1.0f;
 	//3Dテキストのモデル
-	Model* titleTextModel_;
+	Model* titleTextModel_ = nullptr;
 	//プレイヤーのモデル
-	Model* playerModel_;
+	Model* playerModel_ = nullptr;
 	//エネミーのモデル
-	Model* enemyModel_;
+	Model* enemyModel_ = nullptr;
 	WorldTransform playerWorldTransform_;
 	WorldTransform textWorldTransform_;
 	WorldTransform enemyWorldTransform_;

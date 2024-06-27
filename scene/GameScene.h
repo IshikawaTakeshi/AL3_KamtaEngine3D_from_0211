@@ -9,6 +9,7 @@
 #include "WorldTransform.h"
 #include "DebugCamera.h"
 
+#include "Fade.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Skydome.h"
@@ -28,8 +29,10 @@ public: // メンバ関数
 
 	//ゲームフェーズ
 	enum class Phase {
+		kFadeIn, //フェードイン
 		kPlay, //ゲームプレイ
-		kDeath //デス演出
+		kDeath, //デス演出
+		kFadeOut //フェードアウト
 	};
 
 	/// <summary>
@@ -84,6 +87,11 @@ private: // メンバ変数
 
 	//ゲームの現在のフェーズ
 	Phase phase_;
+
+	//フェード
+	Fade* fade_ = nullptr;
+	//フェード時間
+	static inline const float fadeTime_ = 1.0f;
 
 	//カメラ
 	bool isDebugCameraActive_ = false;
