@@ -5,6 +5,9 @@
 class Fade {
 public:
 
+	Fade() = default;
+	~Fade() = default;
+
 	//フェードの状態
 	enum class Status {
 		None, //フェードなし

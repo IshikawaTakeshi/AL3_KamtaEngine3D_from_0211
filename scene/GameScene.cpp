@@ -61,7 +61,7 @@ void GameScene::Initialize() {
 	//プレイヤー生成
 	player_ = new Player();
 	player_->Initialize();
-	player_->SetPos(mapChipField_->GetMapChipPositionByIndex(1, 18));
+	player_->SetPos(mapChipField_->GetMapChipPositionByIndex(2, 18));
 	player_->SetMapChipField(mapChipField_);
 
 	//================================== エネミー ==================================//
@@ -122,10 +122,10 @@ void GameScene::Initialize() {
 //			更新処理
 //////////////////////////////////////////////////////////////////////////////////////
 void GameScene::Update() {
-
+	int i = 0;
 	switch (phase_) {
 #pragma region フェードインの処理
-	case GameScene::Phase::kFadeIn:
+	case GameScene::Phase::kFadeIn:	
 
 		//========================== フェードの更新処理 ==========================//
 		fade_->Update();
@@ -133,10 +133,17 @@ void GameScene::Update() {
 		//========================== 天球の更新処理 ==========================//
 		skydome_->Update();
 
-		////========================== エネミーの更新処理 ==========================//
-		//for (Enemy* enemy : enemies_) {
-		//	enemy->Update();
-		//}
+		//========================== エネミーの更新処理 ==========================//
+		
+		for (Enemy* enemy : enemies_) {
+			enemy->SetPos(mapChipField_->GetMapChipPositionByIndex(12 + i, 17 + i));
+			enemy->UpdateMatrix();
+			i++;
+		}
+
+		//========================== プレイヤーの更新処理 ==========================//
+		player_->SetPos(mapChipField_->GetMapChipPositionByIndex(2, 18));
+		player_->UpdateMatrix();
 
 		//========================== カメラコントローラの更新処理 ==========================//
 		cameraController_->Update();
@@ -312,9 +319,6 @@ void GameScene::Update() {
 		break;
 #pragma endregion
 	}
-	
-	
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Model.h"
 #include "WorldTransform.h"
 #include "ViewProjection.h"
@@ -22,6 +22,10 @@ public:
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// ワールド行列のみの更新処理
+	/// </summary>
+	void UpdateMatrix() { worldTransform_.UpdateMatrix(); }
 
 	/// <summary>
 	/// 描画処理

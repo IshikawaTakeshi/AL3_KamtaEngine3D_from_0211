@@ -10,6 +10,8 @@ TitleScene::~TitleScene() {
 
 void TitleScene::Initialize() {
 
+	phase_ = Phase::kFadeIn;
+
 	dxCommon_ = DirectXCommon::GetInstance();
 
 	textWorldTransform_.Initialize();
@@ -32,16 +34,33 @@ void TitleScene::Initialize() {
 
 void TitleScene::Update() {
 
-	textWorldTransform_.UpdateMatrix();
-	playerWorldTransform_.UpdateMatrix();
-	enemyWorldTransform_.UpdateMatrix();
-	ViewProjection_.UpdateMatrix();
+	switch (phase_) {
+	case TitleScene::Phase::kFadeIn:
+	case TitleScene::Phase::kFadeOut:
 
-	fade_->Update();
+		textWorldTransform_.UpdateMatrix();
+		playerWorldTransform_.UpdateMatrix();
+		enemyWorldTransform_.UpdateMatrix();
+		ViewProjection_.UpdateMatrix();
 
-	//スペースキーを押すと終了する
-	if (Input::GetInstance()->PushKey(DIK_SPACE)) {
-		finished_ = true;
+		fade_->Update();
+
+		//フェーズ切り替え
+		ChangePhase();
+
+		break;
+	case TitleScene::Phase::kMain:
+
+
+		textWorldTransform_.UpdateMatrix();
+		playerWorldTransform_.UpdateMatrix();
+		enemyWorldTransform_.UpdateMatrix();
+		ViewProjection_.UpdateMatrix();
+
+		//フェーズ切り替え
+		ChangePhase();
+
+		break;
 	}
 }
 
@@ -98,10 +117,27 @@ void TitleScene::ChangePhase() {
 	switch (phase_) {
 	case TitleScene::Phase::kFadeIn:
 
+		if (fade_->IsFinished() == true) {
+			phase_ = Phase::kMain;
+		}
+
 		break;
 	case TitleScene::Phase::kMain:
+
+		//スペースキーを押すと終了する
+		if (Input::GetInstance()->PushKey(DIK_SPACE)) {
+
+			phase_ = Phase::kFadeOut;
+			fade_->Start(Fade::Status::FadeOut, fadeTime_);
+			
+		}
 		break;
 	case TitleScene::Phase::kFadeOut:
+
+		if (fade_->IsFinished() == true) {
+			finished_ = true;
+		}
+			
 		break;
 	}
 }

@@ -104,6 +104,11 @@ public:
 	Vector3 CornerPosition(const Vector3& center, Corner corner);
 
 	/// <summary>
+	/// ワールド行列のみの更新処理
+	/// </summary>
+	void UpdateMatrix() { worldTransform_.UpdateMatrix(); }
+
+	/// <summary>
 	/// worldTransformの取得
 	/// </summary>
 	const WorldTransform& GetWorldTransform() { return worldTransform_; }
